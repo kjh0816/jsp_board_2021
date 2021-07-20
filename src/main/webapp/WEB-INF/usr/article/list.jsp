@@ -39,6 +39,12 @@
 			</div>
 
 			<hr />
+			
+			<div class="btns px-4 py-4">
+				<a class="btn btn-link" href="../article/write?boardId=${boardId}">글쓰기</a>
+			</div>
+			
+			<hr />
 
 			<div class="px-4 py-4">
 				<div class="badge badge-primary">검색</div>
