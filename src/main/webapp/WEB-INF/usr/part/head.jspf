@@ -257,7 +257,7 @@ const rqParams = ${rq.paramMapJsonStr};
 						</c:if>
 						<li>
 							<a class="h-full flex items-center px-6">
-								<span>
+								<span>	
 									<input type="text" class="input input-sm input-bordered w-24 lg:w-32" placeholder="Search.." />
 								</span>
 								<span>&nbsp;</span>
