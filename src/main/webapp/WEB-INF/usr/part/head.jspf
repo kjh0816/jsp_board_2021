@@ -101,8 +101,7 @@ const rqParams = ${rq.paramMapJsonStr};
 									<span>
 										<i class="fas fa-sign-out-alt"></i>
 									</span>
-									&nbsp;
-									<span>LOGOUT</span>
+									<span class="hidden sm:block">&nbsp;LOGOUT</span>
 								</a>
 							</li>
 							<li>
@@ -110,7 +109,7 @@ const rqParams = ${rq.paramMapJsonStr};
 									<span>
 										<i class="fas fa-user"></i>
 									</span>
-									<span>MY PAGE</span>
+									<span class="hidden sm:block">&nbsp;MY PAGE</span>
 								</a>
 							</li>
 						</c:if>
