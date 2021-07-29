@@ -8,7 +8,11 @@ import com.jhs.exam.exam2.service.MemberService;
 import com.jhs.exam.exam2.util.Ut;
 
 public class UsrMemberController extends Controller {
-	private MemberService memberService = Container.memberService;
+	private MemberService memberService;
+
+	public void init() {
+		memberService = Container.memberService;
+	}
 
 	@Override
 	public void performAction(Rq rq) {
@@ -39,7 +43,7 @@ public class UsrMemberController extends Controller {
 			break;
 		}
 	}
-	
+
 	private void actionShowFindLoginId(Rq rq) {
 		rq.jsp("usr/member/findLoginId");
 	}
@@ -52,19 +56,19 @@ public class UsrMemberController extends Controller {
 			rq.historyBack("name(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		if (email.length() == 0) {
 			rq.historyBack("email(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		Member oldMember = memberService.getMemberByNameAndEmail(name, email);
-		
-		if ( oldMember == null ) {
+
+		if (oldMember == null) {
 			rq.historyBack("일치하는 회원이 존재하지 않습니다.");
 			return;
 		}
-		
+
 		String replaceUri = "../member/login?loginId=" + oldMember.getLoginId();
 		rq.replace(Ut.f("해당 회원의 로그인아이디는 `%s` 입니다.", oldMember.getLoginId()), replaceUri);
 		return;
@@ -87,34 +91,34 @@ public class UsrMemberController extends Controller {
 			rq.historyBack("loginPw(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		if (name.length() == 0) {
 			rq.historyBack("name(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		if (nickname.length() == 0) {
 			rq.historyBack("nickname(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		if (cellphoneNo.length() == 0) {
 			rq.historyBack("cellphoneNo(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		if (email.length() == 0) {
 			rq.historyBack("email(을)를 입력해주세요.");
 			return;
 		}
-		
+
 		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
 		if (joinRd.isFail()) {
 			rq.historyBack(joinRd.getMsg());
 			return;
 		}
-		
+
 		rq.replace(joinRd.getMsg(), "../member/login");
 	}
 
@@ -147,9 +151,9 @@ public class UsrMemberController extends Controller {
 		Member member = (Member) loginRd.getBody().get("member");
 
 		rq.setSessionAttr("loginedMemberJson", Ut.toJson(member, ""));
-		
+
 		String redirectUri = rq.getParam("redirectUri", "../article/list");
-		
+
 		rq.replace(loginRd.getMsg(), redirectUri);
 	}
 
