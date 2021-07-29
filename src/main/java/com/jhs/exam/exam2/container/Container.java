@@ -35,7 +35,7 @@ public class Container {
 	public static BoardRepository boardRepository;
 	public static BoardService boardService;
 	
-	public static Controller admHomeController;
+	public static AdmHomeController admHomeController;
 
 	public static void init() {
 		memberRepository = new MemberRepository();
