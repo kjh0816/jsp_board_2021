@@ -26,6 +26,10 @@ public class App implements ContainerComponent {
 		// 이 부분을 false로 바꾸면 production 모드 이다.
 		return true;
 	}
+	
+	private static boolean isProductMode() {
+		return isDevMode() == false;
+	}
 
 	// 정적 요소 세팅
 	public static void start() {
@@ -43,5 +47,51 @@ public class App implements ContainerComponent {
 
 	public String getSmtpGmailPw() {
 		return smtpGmailPw;
+	}
+
+	public String getSiteName() {
+		return "레몬 커뮤니티";
+	}
+
+	public String getBaseUri() {
+		String appUri = getSiteProtocol() + "://" + getSiteDomain();
+
+		if (getSitePort() != 80 && getSitePort() != 443) {
+			appUri += ":" + getSitePort();
+		}
+
+		if (getContextName().length() > 0) {
+			appUri += "/" + getContextName();
+		}
+
+		return appUri;
+	}
+
+	private String getContextName() {
+		if (isProductMode()) {
+			return "";
+		}
+
+		return "2021_jsp_board";
+	}
+
+	private int getSitePort() {
+		return 8081;
+	}
+
+	private String getSiteDomain() {
+		return "localhost";
+	}
+
+	private String getSiteProtocol() {
+		return "http";
+	}
+
+	public String getLoginUri() {
+		return getBaseUri() + "/usr/member/login";
+	}
+
+	public String getNotifyEmailFromName() {
+		return "레몬 커뮤니티 알림봇";
 	}
 }
