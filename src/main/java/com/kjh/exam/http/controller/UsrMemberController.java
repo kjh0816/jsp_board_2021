@@ -136,9 +136,9 @@ public class UsrMemberController extends Controller {
 			return;
 		}
 		
-		int loginedMemberId = rq.getLoginedMember().getId();
+		Member loginedMember = rq.getLoginedMember();
 
-		ResultData modifyRd = memberService.modify(loginedMemberId, loginPw, name, nickname, cellphoneNo, email);
+		ResultData modifyRd = memberService.modify(loginedMember, loginPw, name, nickname, cellphoneNo, email);
 
 		if (modifyRd.isFail()) {
 			rq.historyBack(modifyRd.getMsg());

@@ -108,16 +108,22 @@ public class MemberService implements ContainerComponent {
 		memberRepository.modifyPassword(actor.getId(), tempLoginPw);
 	}
 
-	public ResultData modify(int loginedMemberId, String loginPw, String name, String nickname, String cellphoneNo, String email) {
+	public ResultData modify(Member loginedMember, String loginPw, String name, String nickname, String cellphoneNo, String email) {
 		
 
 		Member memberToModify = getMemberByNameAndEmail(name, email);
 
-		if (memberToModify != null && memberToModify.getId() != loginedMemberId) {
+		if (memberToModify != null && memberToModify.getId() != loginedMember.getId()) {
 			return ResultData.from("F-1", Ut.f("%s님은 이메일 주소 `%s`(으)로 이미 가입하셨습니다.", name, email));
 		}
+		
+		memberToModify = getMemberByNickname(nickname);
+		
+		if(memberToModify != null && memberToModify.getId() != loginedMember.getId()) {
+			return ResultData.from("F-2", Ut.f("%s는(은) 이미 존재하는 닉네임입니다.", nickname));
+		}
 
-		memberRepository.modify(loginedMemberId, loginPw, name, nickname, cellphoneNo, email);
+		memberRepository.modify(loginedMember.getId(), loginPw, name, nickname, cellphoneNo, email);
 
 		return ResultData.from("S-1", "수정 완료");
 	}
