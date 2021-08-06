@@ -27,8 +27,12 @@ public class MemberService implements ContainerComponent {
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return ResultData.from("F-2", "비밀번호가 일치하지 않습니다.");
 		}
+		
+		if(member.getAuthLevel() == 7) {
+			return ResultData.from("S-1", "관리자님, 환영합니다.", "member", member);
+		}
 
-		return ResultData.from("S-1", "환영합니다.", "member", member);
+		return ResultData.from("S-2", "환영합니다.", "member", member);
 	}
 
 	public ResultData join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,

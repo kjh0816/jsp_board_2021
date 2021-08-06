@@ -129,5 +129,8 @@ CONCAT('내용--', RAND())
 FROM article;
 */
 
+SELECT * FROM MEMBER
+SELECT * FROM article;
+
 
 
