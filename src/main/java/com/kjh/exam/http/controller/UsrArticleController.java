@@ -72,6 +72,15 @@ public class UsrArticleController extends Controller {
 			rq.historyBack(actorCanDeleteRd.getMsg());
 			return;
 		}
+		
+		
+//		관리자인 경우, 
+		if(actorCanDeleteRd.getResultCode().equals("S-1")) {
+			articleService.delete(id);
+			
+			rq.replace(Ut.f("%d번 게시물을 관리자 권한으로 삭제하였습니다.", id), redirectUri);
+			return;
+		}
 
 		articleService.delete(id);
 

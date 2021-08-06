@@ -82,12 +82,16 @@ public class ArticleService implements ContainerComponent {
 	public ResultData actorCanDelete(Member member, Article article) {
 		int memberId = member.getId();
 		int writerMemberId = article.getMemberId();
+		
+		if(member.getAuthLevel() == 7) {
+			return ResultData.from("S-1", "관리자 권한으로 삭제가 가능합니다.");
+		}
 
 		if (memberId != writerMemberId) {
 			return ResultData.from("F-1", "권한이 없습니다.");
 		}
 
-		return ResultData.from("S-1", "삭제가 가능합니다.");
+		return ResultData.from("S-2", "삭제가 가능합니다.");
 	}
 
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
