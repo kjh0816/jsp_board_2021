@@ -43,16 +43,26 @@ public class MemberService implements ContainerComponent {
 		if (oldMember != null) {
 			return ResultData.from("F-1", Ut.f("%s(은)는 이미 사용중인 로그인아이디입니다.", loginId));
 		}
+		
+		oldMember = getMemberByNickname(nickname);
+		
+		if (oldMember != null) {
+			return ResultData.from("F-2", Ut.f("%s(은)는 이미 사용 중인 닉네임입니다.", nickname));
+		}
 
 		oldMember = getMemberByNameAndEmail(name, email);
 
 		if (oldMember != null) {
-			return ResultData.from("F-2", Ut.f("%s님은 이메일 주소 `%s`(으)로 이미 가입하셨습니다.", name, email));
+			return ResultData.from("F-3", Ut.f("%s님은 이메일 주소 `%s`(으)로 이미 가입하셨습니다.", name, email));
 		}
 
 		int id = memberRepository.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
 		return ResultData.from("S-1", "가입성공", "id", id);
+	}
+
+	private Member getMemberByNickname(String nickname) {
+		return memberRepository.getMemberByNickname(nickname);
 	}
 
 	public Member getMemberByNameAndEmail(String name, String email) {

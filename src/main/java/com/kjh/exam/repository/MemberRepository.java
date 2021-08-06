@@ -72,4 +72,15 @@ public class MemberRepository implements ContainerComponent {
 		MysqlUtil.update(sql);
 		
 	}
+
+	public Member getMemberByNickname(String nickname) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT M.*");
+		sql.append("FROM member AS M");
+		sql.append("WHERE M.nickname = ?", nickname);
+		sql.append("LIMIT 1");
+
+		return MysqlUtil.selectRow(sql, Member.class);
+		
+	}
 }
