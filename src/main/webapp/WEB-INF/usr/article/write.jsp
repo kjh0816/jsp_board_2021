@@ -60,7 +60,9 @@
 						<div>
 							<select class="select select-bordered w-full max-w-md" name="boardId">
 								<option value="0" selected disabled>- 게시판 선택 -</option>
+								<c:if test="${rq.admin}">
 								<option value="1">공지사항</option>
+								</c:if>
 								<option value="2">자유게시판</option>
 							</select>
 						</div>

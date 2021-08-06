@@ -145,6 +145,13 @@ public class UsrArticleController extends Controller {
 			rq.historyBack("body를 입력해주세요.");
 			return;
 		}
+		
+//		관리자가 아닌 회원이 파라미터 변조를 통해 공지사항 게시판에 글을 쓰려하는 경우
+		if(rq.getLoginedMember().getAuthLevel() != 7 && boardId == 1) {
+			
+			rq.historyBack("잘못된 접근입니다.");
+			return;
+		}
 
 		ResultData writeRd = articleService.write(boardId, memberId, title, body);
 
