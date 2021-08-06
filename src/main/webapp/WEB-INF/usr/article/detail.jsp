@@ -35,7 +35,7 @@
 						</div>
 
 						<div>
-							<span class="badge badge-accent">작성자</span> <span>${article.memberId}</span>
+							<span class="badge badge-accent">작성자</span> <span>${article.extra__writerName}</span>
 						</div>
 
 						<div>

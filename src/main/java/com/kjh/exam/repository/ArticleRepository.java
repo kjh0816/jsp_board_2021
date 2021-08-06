@@ -31,7 +31,7 @@ public class ArticleRepository implements ContainerComponent {
 			int limitFrom, int limitTake) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
-		sql.append(", IFNULL(M.nickname, '삭제된회원') AS extra__writerName");
+		sql.append(", IFNULL(M.nickname, '탈퇴한 회원') AS extra__writerName");
 		sql.append("FROM article AS A");
 		sql.append("LEFT JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
@@ -69,7 +69,10 @@ public class ArticleRepository implements ContainerComponent {
 	public Article getForPrintArticleById(int id) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
+		sql.append(", IFNULL(M.nickname, '탈퇴한 회원') AS extra__writerName");
 		sql.append("FROM article AS A");
+		sql.append("LEFT JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
 		sql.append("WHERE A.id = ?", id);
 
 		return MysqlUtil.selectRow(sql, Article.class);
