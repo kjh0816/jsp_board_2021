@@ -228,11 +228,11 @@ const rqParams = ${rq.paramMapJsonStr};
 						</li>
 						<c:if test="${rq.logined}">
 							<li>
-								<a href="#" class="h-full flex items-center px-6 hover:underline hover:text-red-500">
+								<a href="../member/checkPw?action=modifyMember" class="h-full flex items-center px-6 hover:underline hover:text-red-500">
 									<span>
 										<i class="fas fa-user"></i>
 									</span>
-									<span>&nbsp;${rq.loginedMember.nickname}</span>
+									<span>&nbsp;${rq.loginedMember.nickname}님의 정보 수정</span>
 								</a>
 							</li>
 						</c:if>
